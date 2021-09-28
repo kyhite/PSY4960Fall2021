@@ -22,35 +22,36 @@ R can be treated like a big fancy calculator (think scientific calculators you m
 
 * Addition 
 ```{r}
-
+13+7
 ```
 * Subtraction
 ```{r}
-
+80-3
 ```
 * Multiplication 
 ```{r}
-
+45*7
 ```
 * Division
 ```{r}
-
+67/3
 ```
 * Square Root
 ```{r}
-
+sqrt(2)
 ```
 
 * Exponent
 ```{r}
-
+7^2
 ```
 
 **Important:** In terms of calculations, R follows PEMDAS (algebra throwback). Parentheses are going to be **Really** important.   
 
 * More complicated Math: 
 ```{r}
-
+(9+8)^3 - 9
+9+(8*7^2)
 ```
 
 ####Logical Statements
@@ -67,19 +68,21 @@ If this sentence was a fact, R would output the word "TRUE." If it was not true,
 To assess whether logical statements in R are true, we use two equal signs (==). The above example would look something like this: 
 
 ```{r}
-
+"Michael Scott"== "good manager"
 ```
 Running this code tells us the statement is false. (**Note**: this is because the phrase on the left is not the same as the one on the right.. as far as I know, R hasn't watched *the Office*).  
 
 However, R can compute mathematical expressions. This means we can look at something like this: 
 ```{r}
-
+3 == 4
+3+2 == 1+4
 ```
 
 You can also evaluate if statements are **NOT** True. We can do this by using the symbol != 
 For instance, I could evaluate Michael Scott as a manager by writing:
 ```{r}
-
+"Michael Scott" != "good manager"
+3 != 4
 ```
 Note: In other words, == is similar to "is" and != is similar to "is not" 
 
@@ -88,7 +91,10 @@ A similar process can be used to determine if something is greater than, less th
 
 Examples: 
 ```{r}
-
+3<6
+4>2
+4<=6
+5>=7
 ```
 
 We can also make logical statements more complex by creating **and** and **or** statements. 
@@ -97,28 +103,28 @@ We can also make logical statements more complex by creating **and** and **or** 
 
 And statements use &      OR && (if you have more things to evaluate)
 ```{r}
-
+3+4>8 & 2+3 < 6
 ```
 
 Or statements use |       OR  || (if you have more things to evaluate)
 ```{r}
-
+3+4>8 | 2+3 < 6
 ```
 
 ####Learning Outcome 1 Practice: 
 
 1. Find the square root of 89
 ```{r}
-
+sqrt(89)
 ```
 2. Determine if 3 raised to the 5 power is greater than the square root of ten thousand
 ```{r}
-
+3^5> sqrt(10000)
 ```
 
 3. Determine if 5 times 7 is less than or equal to 30 or if 4*8 is equal to 32 
 ```{r}
-
+5*7 <= 30 | 4*8==32
 ```
 
 ### Learning Outcome 2: Describe how to use common R functions 
@@ -128,38 +134,50 @@ If you want to learn more about a function, you can type ?function name in the c
 
 The first one we'll talk about is ":". Typically, it would be used by writing  small#:larger#, and would give you all of the numbers in between. 
 ```{r}
-
+"first number": "second number"
+45:72
+72:45
 ```
 
 rep() allows you to repeat something a set number of times. Looking at the help file, we can see the arguments contained in the function. To use it, we write rep(thingToBeRepeated, #ofTimes). 
 ```{r}
+"rep(thing to be repeated, # repeats)"
 
+rep(22,18)
+rep("i love R", 3)
+rep(12:29,7)
 ```
 **Note:** For functions, you can either write arguments in the order listed in the help file (not labelled), or make sure you include the argument label. 
+```{r}
+rep(time=3, x="this")
+```
 
 seq() gives you a sequence of numbers. typically, we use it by writing seq(lowest#, highest#, by=#). 
 
 ```{r}
-
+seq(30,90, by=3)
 ```
 
 ####Learning Outcome 2 Practice: 
 1. Print every 5th number between 1 and 100. 
 ```{r}
-
+seq(1,100, by=5)
+seq(5,100, by=5)
 ```
 2. Use code to write I love statistics 4 times.
 ```{r}
-
+rep("I love statistics", 4)
 ```
 3. Repeat the numbers 1-10 twice
 ```{r}
+rep(1:10, 2)
 
+rep(time=2, x=1:10)
 ```
 
 4. Print every 3rd number from 1-20 3 times. 
 ```{r}
-
+rep(seq(1,20,by=3),3)
 ```
 
 ###Learning Outcome 3: Explain the differences between variables, vectors, and dataframes 
@@ -182,7 +200,11 @@ Naming conventions: I was taught to use all lower case for the first word, and c
 Variables store one thing in R (it can be a number, a word, or whatever you want)
 
 ```{r}
+favNum<-13
+favNum
 
+breakfast<- "Waffle"
+breakfast
 ```
 **Vectors**
 
@@ -191,66 +213,80 @@ Vectors are objects that store more than one piece of information.
 To save more than one thing in an R variable, you would use the combine function- c().
 
 ```{r}
+"vector"
+number<- c(3,4,5,7,8,5,4,7,4,6,8)
+number
 
+"list"
+breakFood<-c("waffle","eggs", "cereal","coffee","pancake")
+breakFood
 ```
 
 If you want to call one of the things you saved in a vector, you can write vectorName[position of thing]
 ```{r}
-
+breakFood[5]
+number[1]
 ```
 
 **Dataframes**
 Data frames are made from multiple vectors. There are preloaded datasets in R we can use to practice, such as mtcars: 
 ```{r}
-
+data(mtcars)
 ```
 
 We can also combine vectors into a dataframe using R functions (cbind.data.frame or rbind.data.frame). We'll use the vectors we made above as an example.   
 ```{r}
-
+iceCream<- c("bunnyTracks", "cookieDough", "chocolate")
+rating<- c(10, 9, 8)
+dat<- cbind.data.frame(iceCream, rating)
+dat
 ```
 
 Just like you can pick one thing in a vector, you can select one column or one row in a dataframe. You can use brackets like we did with vectors, but you need to specify whether it's a row or a column. If it's a column, you can write dataframe[,column#] and you can use dataframe[row#,].  
 
 ```{r}
-
+dat[3,1]
+dat[,1]
 ```
 
 You can also get columns by using a $. 
 
 ```{r}
-
+dat$iceCream
 ```
 
 ####Learning Outcome 3 Practice:
 
 1. Create a variable that contains your favorite ice cream flavor
 ```{r}
-
+icecream <- "mint chocolate chip"
 ```
 2. Create two vectors: 1 vector should contain the names of four TV shows and the 2nd vector should contain your ratings for those shows
 ```{r}
-
+TV<- c("Game of Thrones", "New Girl", "The Good Place", "Criminal Minds")
+rating<-c(8,9, 8.5, 10 )
 ```
 
 3. Make this variable into a data frame.
 ```{r}
-
+TVratings<- cbind.data.frame(TV, rating)
 ```
 
 4. Print the information in the 2nd row. 
 ```{r}
-
+TVratings[2,]
 ```
 
 5. Print the information in the 2nd column. 
 ```{r}
-
+TVratings[,2]
+TVratings$rating
 ```
 
 Bonus: Print the information in the 3rd row, 1st column.
 ```{r}
-
+TVratings[3,1]
+TVratings$TV[3]
 ```
 
 ###Learning Outcome 4: Explain how to obtain a subset of your data
@@ -261,7 +297,10 @@ Sometimes, you don't need a full dataframe, you just want to use a piece of it. 
 We'll started with indexing because it is similar to what we did above. You can write dataframeName[logical statement] to get a portion of the data. For instance, we could use indexing to get only cars in the mtcars dataset with 4 gears.
 
 ```{r}
-
+data(mtcars)
+mtcars[mtcars$gear==4,]
+gear4<-mtcars[mtcars$gear==4,]
+mtcars[mtcars[10]==4,]
 ```
 In this case, you'll notice that I put a comma after the logical statement. This is because we want all of the **rows** where the car has 4 gears.
 
@@ -273,7 +312,7 @@ If we wanted to get the same subset of data as above, we could do the following:
 
 ```{r}
 "subset(dataframe, condition)"
-
+subset(mtcars, mtcars$gear==4)
 ```
 
 **A Note on Pipes (more advanced)**
@@ -292,7 +331,9 @@ We can use filter and select to subset data with pipes.
 
 We can use filter to pick a subset of rows:
 ```{r}
-mtcars %>%  filter(gear==4)
+"mtcars %>%  filter(gear==4)"
+
+mtcars %>% filter(gear==4)
 ```
 
 We can use select to pick a subset of columns:
@@ -303,20 +344,21 @@ mtcars %>% select(mpg, cyl, hp)
 ####Learning Outcome 4 Practice:
 1. Load the ChickWeight dataset.
 ```{r}
-
+data("ChickWeight")
 ```
 2. Create a subset of data that contains information for Chick 3. 
 ```{r}
-
+subset(ChickWeight, ChickWeight$Chick==3)
+ChickWeight %>% filter(Chick==3)
 ```
 3. Create a subset of data for Diet 2 only. 
 ```{r}
-
+subset(ChickWeight, ChickWeight$Diet==2)
 ```
 
 4. Create a subset of data for all chicks weighing less than 100 gm. 
 ```{r}
-
+subset(ChickWeight, ChickWeight$weight<100)
 ```
 
 ###Learning Outcome 5: Describe your data effectively
@@ -327,7 +369,10 @@ First we can view what our data look like using head() and tail() to see the beg
 they both use a similar format head(dataframe, # of rows )
 We'll use the diamonds dataframe (need to install ggplot if you haven't already!)
 ```{r}
-
+library(ggplot2)
+data(diamonds)
+head(diamonds, 15)
+tail(diamonds)
 ```
 
 This lets us see just part of our data to make sure it loaded appropriately/is what we expect. 
@@ -336,7 +381,7 @@ This lets us see just part of our data to make sure it loaded appropriately/is w
 We can also describe our data using a function called summary. 
 
 ```{r}
-
+summary(diamonds)
 ```
 What do you notice about the summaries? 
 
@@ -349,54 +394,61 @@ We can also get descriptive statistics for specific columns
 
 If we need the # of observations, we can use length() or nrow() to get this information. 
 ```{r}
+nrow(diamonds)
+length(diamonds$cut) #observations
 
+length(diamonds) #columns
 ```
 
 We can also take the average by using the function mean(). 
 ```{r}
-
+mean(diamonds$carat)
 ```
 
 We can get the standard deviation using sd().
 ```{r}
-
+sd(diamonds$carat)
 ```
 
 var() gives us the variance
-
 ```{r}
-
+var(diamonds$carat)
 ```
 range() gives us the range
 
 ```{r}
-
+range(diamonds$carat)
 ```
 
 ###Learning Outcome 5 Practice
 1. Summarize the ChickWeight dataset
 ```{r}
-
+summary(ChickWeight)
 ```
 
 2. Find the mean of the weight column
 ```{r}
-
+mean(ChickWeight$weight)
 ```
 
 3. Summarize the data for just the 1st chick
 ```{r}
-
+summary(subset(ChickWeight, ChickWeight$Chick==1))
+chickone<-subset(ChickWeight, ChickWeight$Chick==1)
+summary(chickone)
 ```
 
 4. What is the variance of the 1st chick's weight? 
 ```{r}
-
+var(chickone$weight)
 ```
  
 5. What is the range in weight for each chick posted in the dataset? 
 
 ```{r}
-
+range(ChickWeight$weight[ChickWeight$Chick==1])
+range(ChickWeight$weight[ChickWeight$Chick==2])
+range(ChickWeight$weight[ChickWeight$Chick==3])
+range(ChickWeight$weight[ChickWeight$Chick==4])
 ```
 
