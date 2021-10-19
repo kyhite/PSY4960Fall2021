@@ -21,6 +21,7 @@ We've already talked about how to transform data into wide and long format. For 
 To do this, we're going to use a function called summarySE. It's in the Rmisc package
 ```{r}
 library(Rmisc)
+library(ggplot2)
 ```
 
 We'll try this with the diamonds dataset (located in ggplot). Specifically, we'll create a summary of price by color. 
@@ -31,13 +32,17 @@ The structure for summarySE is:
 summarySE(data, measurevar(the variable you want to summarize), grouping variables, confidence interval)
 
 ```{r}
+myDiamonds<- subset(diamonds, diamonds$carat>= 1)
 
+summarySE(myDiamonds, measurevar = "price", groupvars = "clarity")
+
+diamondsGraph<- summarySE(myDiamonds, measurevar = "price", groupvars = "clarity")
 ```
 
 ####Learning Outcome 1: Practice 
 1. Open the mtcars dataset. Create a dataset containing a summary of the mpg by cylinder (cyl).
 ```{r}
-
+summarySE(mtcars, measurevar = "mpg", groupvars = "cyl")
 ```
 
 ###General Graphing Notes:
@@ -55,7 +60,7 @@ ggplot makes graphs in layers. I'll try to demonstrate:
 
 Here is an "empty graph" 
 ```{r}
-
+ggplot()
 ```
 You'll notice that the Plot window opened on my version of R and contains a gray background. This is a default "empty graph."
 
@@ -65,7 +70,8 @@ ggplot(data, aes(x,y))
 
 In our case, we'll use the diamonds dataset again and see what happens when we include an x variable. 
 ```{r}
-
+ggplot(diamondsGraph)
+ggplot(diamondsGraph, aes(price)) +geom_bar()
 ```
 
 You'll notice that now we have an x axis, labeled price with values on it. 
@@ -76,7 +82,7 @@ This ggplot() section is the base of our graph. We add additional parts using a 
 We'll start with histograms because we only need one variable to make one. To do this, we can add +geom_histogram() to our code above. 
 
 ```{r}
-
+ggplot(myDiamonds, aes(price))+geom_histogram()
 ```
 
 **Changing the background**
