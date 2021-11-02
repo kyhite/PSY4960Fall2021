@@ -18,6 +18,21 @@ We'll use the following data throughout today's class:
 ```{r}
 dat<- read.csv("~/Desktop/PSY4960-StatisticsData.csv")
 ```
+```{r}
+set.seed(100)
+subj<- 1:60
+conditionFirst<- c(rep("Exclusion", 30), rep("Inclusion", 30))
+age<- rep(c(rep(4, 10), rep(5, 10),rep(6, 10)),2)
+type<- rep(c("observed", "experienced"), 30)
+evaluationExclusion<- sample(1:5, 60, replace=TRUE)
+evaluationInclusion<- sample(1:5, 60, replace=TRUE)
+detectionExclusion<- sample(c("incorrect", "correct"), 60, replace=TRUE)
+detectionInclusion<- sample(c("incorrect", "correct"), 60, replace=TRUE)
+playChoice<- sample(c("includer", "excluder"), 60,replace=TRUE)
+dat<-cbind.data.frame(subj, conditionFirst,age, type, evaluationExclusion, evaluationInclusion, detectionExclusion, detectionInclusion, playChoice)
+```
+
+
 ### Learning Outcome 1: Obtaining descriptive statistics in R
 We've gone through some of these already, but I want to make sure we're on the same page. For descriptive statistics, we'll mostly focus on the measures of central tendency and measures of variability. 
 
